@@ -9,12 +9,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hugo.parkingapi.domain.Vehicle;
 import com.hugo.parkingapi.dto.VehicleDTO;
 import com.hugo.parkingapi.repositories.VehicleRepository;
 import com.hugo.parkingapi.services.VehicleService;
 
+@SpringBootTest
 public class VehicleResourceTest {
 
     @InjectMocks private VehicleService service;
@@ -22,8 +24,8 @@ public class VehicleResourceTest {
 
     @Test
     void testFindAll() {
-		List<Vehicle> list = service.findAll();
-		List<VehicleDTO> listDto = list.stream().map(obj -> new VehicleDTO(obj)).collect(Collectors.toList());  
-		assertNotNull(listDto);
+      List<Vehicle> list = service.findAll();
+      List<VehicleDTO> listDto = list.stream().map(obj -> new VehicleDTO(obj)).collect(Collectors.toList());  
+      assertNotNull(listDto);
     }
 }
