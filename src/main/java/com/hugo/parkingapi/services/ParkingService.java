@@ -39,7 +39,7 @@ public class ParkingService {
 		
 		Optional<Parking> parking = repository.findLastByVehiclePlate(vehicle.getPlate());
 		if(parking.isPresent() && parking.get().getExit() == null){
-			throw new DataIntegrityException("Este veiculo JÀ se encontra no estacionamento !");
+			throw new DataIntegrityException("Este veiculo JÁ se encontra no estacionamento !");
 		}
 				
 		Parking newParking = new Parking(vehicle);
