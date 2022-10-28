@@ -1,0 +1,16 @@
+version: '3.6'
+
+services:
+
+  database:
+    build: ./docker/database/.
+    ports:
+      - "5432:5432"
+    networks:
+      - parking-network
+    container_name: database
+
+networks:
+  parking-network:
+    driver: bridge
+    
