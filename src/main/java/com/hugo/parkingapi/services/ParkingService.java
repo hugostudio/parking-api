@@ -39,7 +39,7 @@ public class ParkingService {
 		
 		Optional<Parking> parking = repository.findLastByVehiclePlate(vehicle.getPlate());
 		if(parking.isPresent() && parking.get().getExit() == null){
-			throw new DataIntegrityException("Este veiculo já se encontra no estacionamento");
+			throw new DataIntegrityException("Este veiculo JÀ se encontra no estacionamento !");
 		}
 				
 		Parking newParking = new Parking(vehicle);
@@ -59,6 +59,10 @@ public class ParkingService {
 
 		if(!parking.get().getPaid()){
 			throw new DataIntegrityException("O estacionamento ainda não foi pago !");
+		}
+		
+		if(parking.isPresent() && parking.get().getExit() != null){
+			throw new DataIntegrityException("Este veiculo NÂO se encontra no estacionamento !");
 		}
 
 		parking.get().setExit(Calendar.getInstance().getTime());
