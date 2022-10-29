@@ -40,8 +40,7 @@ Quanto mais melhor! :)
 
 Passo a passo para execução : 
 
-
-
-[==> URL swagger 
-    http://localhost:8080/api/swagger-ui.html
-    http://localhost:8080/api/v2/api-docs
+1- executar o script /docker/docker-compose.yml
+2- executar a aplicação spring "ParkingApiApplication.java"
+3- Acessar a URL swagger "http://localhost:8080/api/swagger-ui.html" para testar a API.
+    
