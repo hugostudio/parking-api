@@ -38,6 +38,8 @@ Sobre testes unitários:
 Quanto mais melhor! :)
 
 
+
+
 Passo a passo para execução : 
 
 1- executar o script /docker/docker-compose.yml
