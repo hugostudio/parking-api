@@ -1,31 +1,37 @@
 package com.hugo.parkingapi.resources;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.hugo.parkingapi.domain.Vehicle;
-import com.hugo.parkingapi.dto.VehicleDTO;
-import com.hugo.parkingapi.repositories.VehicleRepository;
 import com.hugo.parkingapi.services.VehicleService;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 public class VehicleResourceTest {
-
-    @InjectMocks private VehicleService service;
-    @Mock private VehicleRepository repository;
+    
+    @Autowired private MockMvc mockMvc;
+    @MockBean private VehicleService service;
 
     @Test
-    void testFindAll() {
-      List<Vehicle> list = service.findAll();
-      List<VehicleDTO> listDto = list.stream().map(obj -> new VehicleDTO(obj)).collect(Collectors.toList());  
-      assertNotNull(listDto);
+    void testFindAll() throws Exception {
+      Vehicle vehicle = new Vehicle("WER-4321", null, null);      
+      Mockito.when(this.service.findAll()).thenReturn(List.of(vehicle));
+      this.mockMvc.perform(get("/v1/vehicle/"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().json("[{'plate': 'WER-4321'}]"));
     }
 }

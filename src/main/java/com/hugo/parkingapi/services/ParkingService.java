@@ -89,7 +89,7 @@ public class ParkingService {
 		return parking.get();
 	}
 
-	private Vehicle getVehicleIfExistOrCreate(VehicleDTO vehicleDTO){
+	Vehicle getVehicleIfExistOrCreate(VehicleDTO vehicleDTO){
 		Optional<Vehicle> optVehicle = vehicleService.findByPlate(vehicleDTO.getPlate());		
 		if(!optVehicle.isPresent()){
 			return vehicleService.save(vehicleDTO);
